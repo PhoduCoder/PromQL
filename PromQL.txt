@@ -1,0 +1,83 @@
+PromQL 
+Go to this URL
+http://34.121.40.211:9090/alerts?search=
+
+sum(rate(node_cpu_seconds_total{cpu="0",mode="idle"}[5m]))
+====================
+Alerts have this overall body
+name: [Name of alert]
+expr: [query for the alert]
+for: [ Duration for this query ]
+labels: [Set of key value pairs ]
+annotations: ??
+====================
+
+Instant vectors [At that instant]
+
+Range vectors [For a period of time]
+
+Gauge [can go up and down]
+Counters [Only go up]
+
+===
+
+Aggregation Operators 
+Input : Instant vectors [always]
+Output: Instant vectors [always]
+
+Eg. sum(), min(), max(), stddev() stdvar()
+TO chose the specific labels to aggregate, use the by operator
+To exclude a particular label to aggregate, use the without operator 
+====
+
+Binary operators [Arithmetic like +,-,*,%][Comparison like !=, ==, >, >=]
+[and, or, unless]
+
+Can apply on two scalars, scalars and instant vectors
+and instant vectors and instant vectors
+
+Result is always an instant vectors 
+
+====
+Functions 
+
+Takes instant vector as input and instant vector as Output
+Takes range vector as input and instant vector as Output
+
+rate Function
+Takes range vector as input 
+and turns instant vector as Output
+
+rate(http_requests_total[10m])
+http_requests_total[10m] is an range vector 
+
+Rate calculates the per second increase for a counter variable.
+Rate will always be used for a counter variable
+===
+
+by operator : tells to aggregate only by the label we care about 
+
+sum(node_cpu_seconds_total{mode="idle"}) by (cpu)
+So this means aggregate only by the labels that i tell you, in this case cpu 
+
+now since counter resets, so we will use the rate function here.
+rate function will know how to deal with counter resets
+======
+sum with rate
+never 
+rate with sum
+=======
+
+without label : tells to aggregate without the label i mentioned 
+
+===
+
+sum(rate(node_cpu_seconds_total{mode="idle"}[10m])) by (cpu) / sum(rate(node_cpu_seconds_total[10m])) by (cpu)
+
+Binary operators are very picky and want the same labels. 
+
+===
+
+
+
+

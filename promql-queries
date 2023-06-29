@@ -1,0 +1,17 @@
+PromQL queries 
+up
+up{job=~"tns-app|tns-db"}
+Tells us which jobs are running.
+1 means up and running, 0 means not running
+
+tns_client_request_duration_seconds_count{status_code="500", job="tns-app"}
+
+rate(node_network_receive_bytes_total[1m])
+The metric node_network_receive_bytes_total is a metric of type counter. 
+A counter metric is a cumulative number that is always going up. For this example,
+ the number of bytes received is always increasing. The rate function calculates 
+ the rate of increase of this metric per second. Lastly the [1m] is the range 
+ selector for the query, determining the window in which to average the values
+  across (ie. take all the values over the last minute for this per-second value).
+   This helps us specify how far back values should be fetched for each resulting
+    data point.
