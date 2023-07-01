@@ -1,0 +1,23 @@
+Understanding Prometheus architecture
+
+In Prometheus, it is important to first understand the concept of series.
+
+Series is a metric name with given labels. 
+each unique combination of a metric name and its label values forms a distinct series in Prometheus
+
+As an example
+node_cpu_total_seconds{"instance=inst1"} is a series
+Similarly,
+node_cpu_total_seconds{"instance=inst1", "mode=irq"} is another series 
+and 
+node_cpu_total_seconds{"instance=inst1","mode=sys"} is another series
+
+Now data points from the same series within a specific time range 
+are chunked together.
+This data is compressed and encoded and is optimized for high 
+storage of data in a compact format. 
+
+
+
+
+
