@@ -11,9 +11,9 @@ For gauge metrics , we would like to aggregate by sum, avg, min,max
 
 
 Aggregate or Sum the rate of CPU in idle mode per instance for a period of 5 minutes 
-
+**
 sum by (instance)(rate(node_cpu_seconds_total{mode="idle"}[5m]))
-
+**
 
 Percentage of Idle CPU 
 
