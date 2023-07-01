@@ -93,3 +93,10 @@ sum by (namespace)(rate(kube_pod_container_status_restarts_total[5m]))
 
 sum by (instance) (rate(kube_pod_container_status_restarts_total[5m]))
 
+More about the performance of a web application 
+Averages from Summaries 
+Percentiles from Histogram 
+
+Average API server request duration 
+
+(sum by (instance) (rate(apiserver_request_duration_seconds_sum[5m])))/(sum by (instance) (rate(apiserver_request_duration_seconds_count[5m])))
